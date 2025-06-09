@@ -17,7 +17,7 @@ class EmotionModel(nn.Module):
         super(EmotionModel, self).__init__()
         # Load model and quantize
         self.model = timm.create_model('deit_tiny_patch16_224', pretrained=True, num_classes=7)
-        self.model.load_state_dict(torch.load('/Users/h22qin/Desktop/CV_Final_Proj/model.pth', map_location=torch.device('cpu')), strict=True)
+        self.model.load_state_dict(torch.load('/Users/haoranqin/Lightweight_Emotion_Detector/models/model.pth', map_location=torch.device('cpu')), strict=True)
         '''
         I have to quantize the model here since my training was run on GPU and previously quantized model is not compatible
         However, if you are running on CUDA backend, can directly import 'quantized_deit_full.pth' or 'quantized_deit_0.2M.pth'
