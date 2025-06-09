@@ -109,14 +109,14 @@ if __name__ == '__main__':
 
     # Paths to data
     '''
-    base_path = '/home/qinh3/MCNC_pretrain/cvhw/rafdb'
-    train_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb/train_labels.csv'
-    test_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb/test_labels.csv'
+    base_path = 'data/rafdb'
+    train_csv = 'data/train_labels.csv'
+    test_csv = 'data/test_labels.csv'
     '''
     
-    base_path = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented'
-    train_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/train_labels.csv'
-    test_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/test_labels.csv'
+    base_path = 'data/rafdb_augmented'
+    train_csv = 'data/train_labels.csv'
+    test_csv = 'data/test_labels.csv'
 
     model_type = args.model_type 
 

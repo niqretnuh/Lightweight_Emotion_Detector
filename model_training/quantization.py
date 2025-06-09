@@ -11,7 +11,7 @@ import os
 def load_deit_model():
     teacher_model = timm.create_model('deit_tiny_patch16_224', pretrained=True, num_classes=7)  # Change num_classes if needed
     teacher_model.eval()  # Set the model to evaluation mode
-    teacher_model.load_state_dict(torch.load('/home/qinh3/MCNC_pretrain/cvhw/models/pretrained_deit/model.pth'))
+    teacher_model.load_state_dict(torch.load('models/pretrained_deit/model.pth'))
     return teacher_model
 
 # Function to apply dynamic quantization
@@ -54,8 +54,8 @@ def get_test_loader(batch_size=64):
         transforms.Normalize([0.5]*3, [0.5]*3) 
     ])
     
-    base_path = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented'
-    test_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/test_labels.csv'
+    base_path = 'data/rafdb_augmented'
+    test_csv = 'data/test_labels.csv'
     
     test_dataset = Four4All(csv_file=test_csv, img_dir=base_path, split='test', transform=transform)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
@@ -79,8 +79,8 @@ test_loader = get_test_loader(batch_size=64)
 device = torch.device("cpu")
 quantized_teacher_model = quantized_teacher_model.to(device)
 
-torch.save(quantized_teacher_model.state_dict(), '/home/qinh3/MCNC_pretrain/cvhw/models/quantized/quantized_deit_0.2M.pth')
-torch.save(quantized_teacher_model, '/home/qinh3/MCNC_pretrain/cvhw/models/quantized/quantized_deit_full.pth')
+torch.save(quantized_teacher_model.state_dict(), 'models/quantized_deit_0.2M.pth')
+torch.save(quantized_teacher_model, 'models/quantized_deit_full.pth')
 
 accuracy = evaluate_quantized_model(quantized_teacher_model, test_loader, device=device)
 print(f"Quantized Model Accuracy: {accuracy:.4f}")

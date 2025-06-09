@@ -115,7 +115,7 @@ def distill_models():
     # Load the teacher model (ResNet-18)
     teacher_model = models.resnet18(pretrained=True).cuda()
     teacher_model.fc = nn.Linear(teacher_model.fc.in_features, 7)  # Adjust for 7 classes
-    pretrained_model_path = '/home/qinh3/MCNC_pretrain/cvhw/models/custom_augmented/pretrained_res18/model.pth'
+    pretrained_model_path = '/pretrained_models/pretrained_res18/model.pth'
     state_dict = torch.load(pretrained_model_path)
     teacher_model.load_state_dict(state_dict)
     '''
@@ -129,9 +129,9 @@ def distill_models():
     print(f"Number of parameters in ResNet10: {sum(p.numel() for p in student_model_res10.parameters()) / 1e6} million")
 
     # Prepare data (example paths)
-    base_path = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented'
-    train_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/train_labels.csv'
-    test_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/test_labels.csv'
+    base_path = 'data/rafdb_augmented'
+    train_csv = 'data/train_labels.csv'
+    test_csv = 'data/test_labels.csv'
     
     transform = transforms.Compose([
         transforms.Resize((224, 224)),

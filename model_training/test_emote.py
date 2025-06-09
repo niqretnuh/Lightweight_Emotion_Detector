@@ -31,15 +31,15 @@ transform = transforms.Compose([
     )
 ])
 
-base_path = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented'
-train_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/train_labels.csv'
-test_csv = '/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/test_labels.csv'
+base_path = 'data/rafdb_augmented'
+train_csv = 'data/rafdb_augmented/train_labels.csv'
+test_csv = 'data/rafdb_augmented/test_labels.csv'
 
-fer_dataset_train = Four4All(csv_file='/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/train_labels.csv',
-                            img_dir='/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented', transform=transform)
+fer_dataset_train = Four4All(csv_file='data/rafdb_augmented/train_labels.csv',
+                            img_dir='data/rafdb_augmented', transform=transform)
 
-fer_dataset_test = Four4All(csv_file='/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented/test_labels.csv',
-                            img_dir='/home/qinh3/MCNC_pretrain/cvhw/rafdb_augmented', split="test", transform=transform)
+fer_dataset_test = Four4All(csv_file='data/rafdb_augmented/test_labels.csv',
+                            img_dir='data/rafdb_augmented', split="test", transform=transform)
 
 train_loader = DataLoader(fer_dataset_train, batch_size=16, shuffle=True)
 test_loader = DataLoader(fer_dataset_test, batch_size=16, shuffle=False)
@@ -131,8 +131,7 @@ if __name__ == '__main__':
     '''
     train_model(model, train_loader, num_epochs=80)
     '''
-    #checkpoint = torch.load('/home/qinh3/MCNC_pretrain/cvhw/models/ResEmoteNet/checkpoint_epoch_80.pth')
-    checkpoint = torch.load('/home/qinh3/MCNC_pretrain/cvhw/rafdb_model (1).pth')
+    checkpoint = torch.load('/data/rafdb_model (1).pth')
     model.load_state_dict(checkpoint['model_state_dict'], strict=True)
     print("Model loaded for final evaluation.")
     print(evaluate(model, train_loader))
